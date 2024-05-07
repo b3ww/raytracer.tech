@@ -1,10 +1,6 @@
-import { useState } from "react";
 import DropZone from "./DropZone";
 
-const Settings = ({ clusters, formik }) => {
-
-    const [value, setValue] = useState(50)
-
+const Settings = ({formik}) => {
     return (
         <div className="p-4 relative h-full">
             <form className="flex flex-col gap-12 h-full justify-between" onSubmit={formik.handleSubmit}>
@@ -22,7 +18,6 @@ const Settings = ({ clusters, formik }) => {
             </form>
         </div>
     )
-
 }
 
 export default Settings;
