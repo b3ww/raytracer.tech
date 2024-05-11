@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState} from "react";
 import Clusters from "./ClusersMonitoring";
 import ConfigEditor from "./ConfigEditor";
 import Settings from "./Settings";
