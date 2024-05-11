@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Clusters from "./ClusersMonitoring";
 import ConfigEditor from "./ConfigEditor";
 import Settings from "./Settings";
@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import axios from "axios"
 
 function App() {
+
   const ARR = [
     {label:"Config", id:"config", Code: (props) => <ConfigEditor {...props}/>},
     {label:"Setting", id:"setting", Code: (props) => <Settings {...props} />},
@@ -22,12 +23,23 @@ function App() {
     },
     onSubmit: values => {
         console.log(`${HTTP}/generate`)
-        axios.post(`${HTTP}/generate`, {
-          values
-        }, {
+        axios.post(`${HTTP}/generate`, values, {
           headers: {
-            "Allow-Origin-Allow-Access": "*"
-          }})
+              "Allow-Origin-Allow-Access": "*"
+          }
+        })
+        .then(response => {
+          // Si la requête a réussi, vous pouvez traiter la réponse ici
+        })
+        .catch(error => {
+          // Si la requête a échoué, vous pouvez traiter l'erreur ici
+          console.log(error)
+          if (error.response && error.response.status === 400) {
+              alert(`Erreur : ${error.response.data}`);
+          } else {
+              console.error("Erreur inattendue :", error);
+          }
+      } );
     }
 });
 
